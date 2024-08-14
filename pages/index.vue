@@ -1,8 +1,9 @@
 <script setup>
 const country = ref(null);
 const region = ref("Filter By Region");
-const countriesData = ref([]);
 const filteredData = ref([]);
+const countriesData = ref(null);
+const error = ref(null);
 
 const handleCountryChange = (newValue) => {
   country.value = newValue;
@@ -12,8 +13,10 @@ const handleRegionChange = (newValue) => {
 };
 
 onMounted(async () => {
-  countriesData.value = await $fetch("https://restcountries.com/v3.1/all");
-  filteredData.value = countriesData.value;
+  const { data, error } = await fetchApiData(
+    "https://restcountries.com/v3.1/all"
+  );
+  filteredData.value = data.value;
 });
 
 watch(region, () => {
@@ -47,14 +50,13 @@ watch(country, (newValue) => {
     />
     <!-- Card grid-->
     <div
-    v-if="filteredData.length > 0"
+      v-if="filteredData.length > 0"
       class="grid gap-10 py-5 px-7 grid-cols-1 md:grid-cols-3 lg:grid-cols-4"
     >
       <!-- Card component-->
-      <CountryCard  v-for="item in filteredData" :item="item" />
+      <CountryCard v-for="item in filteredData" :item="item" />
     </div>
+    <div v-else-if="error"><h1>{{ error }}</h1></div>
     <LoadingSpinner v-else />
   </main>
 </template>
-
-<style scoped></style>

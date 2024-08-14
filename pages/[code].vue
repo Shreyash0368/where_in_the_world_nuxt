@@ -1,3 +1,28 @@
+<script setup>
+const { code } = useRoute().params;
+const item = ref(null);
+const nativeName = ref(null);
+const currenyText = ref("None");
+const error = ref(null);
+
+onMounted(async () => {
+  const { data, error } = await fetchApiData(
+    `https://restcountries.com/v3.1/alpha?codes=${code}`
+  );
+  item.value = data.value[0];
+  const nativeNameKeys = Object.keys(item.value.name.nativeName);
+  nativeName.value = nativeNameKeys
+    .map((key) => item.value.name.nativeName[key].common)
+    .join(", ");
+  const currencyObj =
+    item.value.currencies[Object.keys(item.value.currencies)[0]];
+
+  if (currencyObj) {
+    currenyText.value = `${currencyObj.name} (${currencyObj.symbol})`;
+  }
+});
+</script>
+
 <template>
   <div class="container h-full max-w-screen-2xl">
     <div class="pl-12 py-5 md:my-4">
@@ -19,7 +44,11 @@
       <div class="md:gap-7 md:px-11 lg:flex">
         <!-- image section -->
         <div class="container mb-4 px-4 flex items-center justify-center">
-          <img :src="item.flags.png" :alt="item.flags.alt" class="md:min-h-56 lg:h-4/5" />
+          <img
+            :src="item.flags.png"
+            :alt="item.flags.alt"
+            class="md:min-h-56 lg:h-4/5"
+          />
         </div>
         <!-- text region -->
         <div class="container px-4">
@@ -59,32 +88,7 @@
         </div>
       </div>
     </div>
+    <div v-else-if="error"><h1>{{ error }}</h1></div>
     <LoadingSpinner v-else />
   </div>
 </template>
-
-<script setup>
-const { code } = useRoute().params;
-const item = ref(null);
-const nativeName = ref(null);
-const currenyText = ref("None");
-
-onMounted(async () => {
-  const response = await $fetch(
-    `https://restcountries.com/v3.1/alpha?codes=${code}`
-  );
-  item.value = response[0];
-  const nativeNameKeys = Object.keys(item.value.name.nativeName);
-  nativeName.value = nativeNameKeys
-    .map((key) => item.value.name.nativeName[key].common)
-    .join(", ");
-  const currencyObj =
-    item.value.currencies[Object.keys(item.value.currencies)[0]];
-
-  if (currencyObj) {
-    currenyText.value = `${currencyObj.name} (${currencyObj.symbol})`;
-  }
-});
-</script>
-
-<style scoped></style>

@@ -5,8 +5,6 @@
         <h1 @click="useRouter().push('/')" class="text-3xl font-bold">Where in the world?</h1>
       </nav>
     </header>
-    <NuxtLoadingIndicator />
-
     <slot />
   </div>
 </template>
