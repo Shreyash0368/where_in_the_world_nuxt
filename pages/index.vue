@@ -16,6 +16,8 @@ onMounted(async () => {
   const { data, error } = await fetchApiData(
     "https://restcountries.com/v3.1/all"
   );
+  
+  countriesData.value = data.value;
   filteredData.value = data.value;
 });
 
