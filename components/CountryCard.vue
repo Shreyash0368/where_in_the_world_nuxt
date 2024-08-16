@@ -1,5 +1,8 @@
 <template>
-  <div class="countryCard" key="item.cca3" @click="handleClick(item.cca3)">
+  <li
+    class="bg-white rounded-md shadow-sm transform transition-transform duration-300 hover:scale-105 max-h-96"
+    @click="handleClick(item.cca3)"
+  >
     <div class="h-1/2">
       <img
         :src="item.flags.png"
@@ -8,12 +11,12 @@
       />
     </div>
     <div class="p-3 h-1/2">
-      <h3 class="font-bold text-xl my-1">{{ item.name.common }}</h3>
-      <p><b>Population:</b> {{ item.population }}</p>
-      <p><b>Region:</b> {{ item.region }}</p>
-      <p v-if="item.capital"><b>Capital:</b> {{ item.capital[0] }}</p>
+      <h3 class="font-bold text-xl my-3">{{ item.name.common }}</h3>
+      <p><span class="font-medium">Population:</span> {{ item.population }}</p>
+      <p><span class="font-medium">Region:</span> {{ item.region }}</p>
+      <p v-if="item.capital"><span class="font-medium">Capital:</span> {{ item.capital[0] }}</p>
     </div>
-  </div>
+  </li>
 </template>
 
 <script setup>
@@ -23,9 +26,3 @@ function handleClick(countryCode) {
   useRouter().push({ name: "code", params: { code: countryCode } });
 }
 </script>
-
-<style scoped>
-.countryCard {
-  @apply container mx-auto max-w-64 bg-white rounded-md shadow-md transform transition-transform duration-300 hover:scale-105 max-h-80;
-}
-</style>

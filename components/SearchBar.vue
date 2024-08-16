@@ -1,11 +1,11 @@
 <template>
   <div class="my-2 px-10 py-10 h-25 md:flex gap-10 justify-between">
-    <div class="relative rounded shadow-lg">
+    <div class="relative rounded ">
       <input
         v-model="country"
         type="text"
         placeholder="Enter country name..."
-        class="outline-none px-12 py-4 border rounded shadow-lg hover:shadow-sm w-full"
+        class="outline-none px-12 py-4 border rounded shadow-md hover:shadow-none w-full"
       />
       <img
         src="../assets/icons/search.svg"
@@ -18,7 +18,7 @@
         name="region-selector"
         id="region-selector"
         v-model="region"
-        class="outline-none appearance-none rounded shadow-lg w-full p-4 pr-12"
+        class="outline-none appearance-none rounded shadow-md hover:shadow-none w-full p-4 pr-12"
       >
         <option v-for="o in options" :key="o" :value="o">
           {{ o }}
@@ -27,7 +27,7 @@
       <img
         src="../assets/icons/arrow-down.svg"
         alt="dropdown"
-        class="absolute right-4 top-1/2 mx-1 transform -translate-y-1/2 w-4 h-4"
+        class="absolute right-4 top-1/2 mx-1 transform -translate-y-1/2 w-3 h-3"
       />
     </div>
   </div>

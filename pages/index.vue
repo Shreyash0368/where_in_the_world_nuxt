@@ -51,13 +51,13 @@ watch(country, (newValue) => {
       @countryChange="handleCountryChange"
     />
     <!-- Card grid-->
-    <div
+    <ul
       v-if="filteredData.length > 0"
-      class="grid gap-10 py-5 px-7 grid-cols-1 md:grid-cols-3 lg:grid-cols-4"
+      class="grid gap-8 py-5 px-7 grid-cols-1 md:grid-cols-3 lg:grid-cols-4"
     >
       <!-- Card component-->
-      <CountryCard v-for="item in filteredData" :item="item" />
-    </div>
+      <CountryCard v-for="item in filteredData" :item="item" :key="item.cca3"/>
+    </ul>
     <div v-else-if="error"><h1>{{ error }}</h1></div>
     <LoadingSpinner v-else />
   </main>

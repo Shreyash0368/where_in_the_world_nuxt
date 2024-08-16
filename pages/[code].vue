@@ -33,7 +33,7 @@ onMounted(async () => {
           class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
         />
         <button
-          class="shadow-lg hover:shadow-md py-2 px-12 rounded-md"
+          class="shadow-md hover:shadow-sm py-2 px-12 rounded-md"
           @click="useRouter().go(-1)"
         >
           Back
@@ -53,7 +53,7 @@ onMounted(async () => {
         <!-- text region -->
         <div class="container px-4">
           <h1 class="text-3xl font-bold">{{ item.name.common }}</h1>
-          <div class="container py-5 md:text-lg lg:flex lg:gap-8">
+          <div class="container py-5 md:text-lg lg:flex lg:gap-14">
             <div class="lg:h-3/5">
               <CardLine property="Native Names" :value="nativeName" />
               <CardLine property="Capital" :value="item?.capital[0]" />
@@ -61,7 +61,7 @@ onMounted(async () => {
               <CardLine property="Region" :value="item?.region" />
               <CardLine property="Subregion" :value="item?.subregion" />
             </div>
-            <div class="lg:w-3/5">
+            <div class="lg:h-3/5">
               <CardLine property="TLD" :value="item.tld[0]" />
               <CardLine
                 property="Languages"
